@@ -1,0 +1,100 @@
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="theme-color" content="#7289DA" />
+	<meta name="author" content="Nerrix Services" />
+    <meta name="description" content="Lookup a Discord User or Bot ID. Powered by Nerrix Services" />
+	<meta name="keywords" content="discord.id, discord loopkup, nerrix services" />
+	<meta property="og:title" content="Discord Lookup" />
+	<meta property="og:url" content="https://discord.id" />
+	<meta property="og:description" content="Lookup a Discord User or Bot ID. Powered by Nerrix Services" />
+	<meta property="og:image" content="https://discord.id/lookup.png" />
+    <title>Discord Lookup</title>
+	<meta property="og:site_name" content="Nerrix Services" />
+	<meta name="twitter:title" content="Discord Lookup" />
+    <meta name="twitter:image" content="https://discord.id/lookup.png" />
+    <meta name="twitter:url" content="https://discord.id" />
+    <meta name="twitter:card" content="Lookup a Discord User or Bot ID. Powered by Nerrix Services" />
+    <link rel="shortcut icon" type="image/png" href="https://discord.id/lookup.png">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="icon" href="https://discord.id/lookup.png" type="image/png">
+	<link href="bundle.css" rel="stylesheet"></head>
+	<link href="stil.css" rel="stylesheet"></head>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<style>
+@font-face {
+  font-family: "Logos";
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url(fa.ttf) format("truetype")
+}
+.fa-search:before {
+  content: "\f002  Discord Lookup";
+  font-family: Logos, Nunito;
+  color: white;
+  font-size: 1.5em;
+  font-style: Normal;
+  margin: 0.5em;
+}
+
+</style>
+</head>
+<body bgcolor="#2C2F33">
+<div class="header">
+<span style="display: inline; border-radius: 50%;" class="fa-search"></span>
+</div>
+<center>
+<br/>
+<div class="container container">
+<div class="col-md-10 col-xs-12">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143055490-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-143055490-1');
+</script>
+<script>
+function isenden() {
+	 let req = new XMLHttpRequest();
+     let datar = new FormData(document.getElementById('contactf'));
+     req.open("POST", "check.php", true);
+     req.onload = () => {
+        if(req.responseText != "0") {
+			let alertDiv = document.getElementById('result');
+            alertDiv.innerHTML = req.responseText;
+            let eins = document.getElementById('inputArt');
+			eins.value = "";
+			grecaptcha.reset();
+        } else {
+			let alertDiv = document.getElementById('result');
+            alertDiv.innerHTML = '<br/><div id="oki" style="background-color: #f76454; color: white; font-family: Nunito; font-size: 1em; border-radius: 10px; padding: 0.5em;">Ops! Something went wrong!</div>';
+			setTimeout(() => { (function(x){x.parentNode.removeChild(x);})(document.getElementById("oki")); }, 3000);
+		}
+     };
+
+    req.send(datar);
+}
+</script>
+<form id="contactf">
+<div class="form-group">
+<label for="inputID">User-ID</label>
+<input class="form-control" type="text" id="inputArt" name="userid" required maxlength="20" style="width: 40%;"></input>
+</div>
+<div class="pull-center">
+<button id="senden" style="color: white; border-radius: 10%; border: 0;" data-sitekey="6LdPoYYUAAAAAPcW66OZGlrsrFzR9Yka4bqPNsTG" class="btn btn-success g-recaptcha" data-callback="isenden">Check</button>
+</div>
+</form>
+<br>
+<div id="result">
+</div>
+</div>
+</center>
+<footer style="margin-bottom: 5px; text-align: center; position: absolute; font-size: 0.8em; left: 0; bottom: 1em; width: 100%;">
+Powered by <a style="color: #ff5858; text-decoration: none;" target="_blank" href=""></a> | Not affiliated with Discord, Inc.</footer>
+</body>
+</html>
